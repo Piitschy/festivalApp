@@ -1,4 +1,4 @@
-import { RecordModel } from 'pocketbase';
+import { type RecordModel } from 'pocketbase';
 
 export type EventRecord = RecordModel & {
   name: string;
@@ -9,6 +9,11 @@ export type EventRecord = RecordModel & {
   description: string
   homepage_ignore: boolean
   team: Team
+}
+
+export type EventDay = {
+  day: string
+  events: EventRecord[]
 }
 
 export type CategoryRecord = RecordModel & {}
