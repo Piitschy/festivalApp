@@ -2,6 +2,13 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', '@kevinmarrec/nuxt-pwa', '@nuxtjs/device', '@pinia/nuxt', 'nuxt-vitest'],
+  imports: {
+    autoImport: true,
+    addons: {
+      vueTemplate: true
+    },
+    dirs: ["stores", "types"],
+  },
   tailwindcss: {
     config: {
       plugins: [
@@ -92,10 +99,12 @@ export default defineNuxtConfig({
       description: process.env.NUXT_PUBLIC_DESCRIPTION
     },
     icon: {
+      //@ts-ignore
       purpose: 'maskable'
     },
     workbox: {
       templatePath: '@/public/sw.js',
+      //@ts-ignore
       offlinePage: '/404.html',
       globPatterns: ['**/*.{js,css}'],
       offline: true,
