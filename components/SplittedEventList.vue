@@ -36,15 +36,16 @@
 </template>
 
 <script setup>
-const eventManager = useEventManager()
+const eventStore = useEventStore()
+//eventStore.update()
 const records = ref(null)
 const recordsSkipPast = ref(null)
 const skipPast = ref(true)
 const loading = ref(true)
 
 onMounted(async () => {
-    recordsSkipPast.value = await eventManager.getDayList(true)
-    records.value = await eventManager.getDayList()
+    recordsSkipPast.value = eventStore.getDayList(true)
+    records.value = eventStore.getDayList()
     loading.value = false
 })
 

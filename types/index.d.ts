@@ -1,18 +1,18 @@
-// import { RecordModel } from 'pocketbase';
+import { RecordModel } from 'pocketbase';
 
-// export type Event = RecordModel & {
-//   name: string;
-//   category: Category
-//   location: Location
-//   start: Date
-//   end: Date
-//   description: string
-//   homepage_ignore: boolean
-//   team: Team
-// }
+export type EventRecord = RecordModel & {
+  name: string;
+  category: Category
+  location: Location
+  start: Date
+  end: Date
+  description: string
+  homepage_ignore: boolean
+  team: Team
+}
 
-// export type Category = RecordModel & {}
+export type CategoryRecord = RecordModel & {}
 
-// export type Location = RecordModel & {}
+export type LocationRecord = RecordModel & {}
 
-// export type Team = RecordModel & {}
+export type TeamRecord = RecordModel & {}

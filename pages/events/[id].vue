@@ -63,11 +63,10 @@
 
 <script setup>
 const route = useRoute();
-const eventStore = useEventStore();
-eventStore.update()
+const eventManager = useEventManager();
 const record = ref(null);
 
 onMounted(async () => {
-  record.value = await eventStore.getById(route.params.id);
+  record.value = await eventManager.getById(route.params.id);
 });
 </script>

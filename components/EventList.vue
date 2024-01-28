@@ -10,24 +10,24 @@
 
 <script setup>
 const props = defineProps(["limit", "homepage"])
-const eventStore = useEventStore()
+const eventManager = useEventManager()
 let records = ref(null)
 
 
 onMounted(async () => {
-    await eventStore.update()
+    await eventManager.update()
     console.log(props)
     if (props.homepage !== "") {
         if (props.limit === undefined) {
-            records.value = await eventStore.getList()
+            records.value = await eventManager.getList()
         } else {
-            records.value = await eventStore.getList(props.limit)
+            records.value = await eventManager.getList(props.limit)
         }
     } else {
         if (props.limit === undefined) {
-            records.value = await eventStore.getUpcomingHomepageEvents()
+            records.value = await eventManager.getUpcomingHomepageEvents()
         } else {
-            records.value = await eventStore.getUpcomingHomepageEvents(props.limit)
+            records.value = await eventManager.getUpcomingHomepageEvents(props.limit)
         }
     }
 })

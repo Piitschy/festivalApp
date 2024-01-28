@@ -1,16 +1,14 @@
 import { defineStore } from 'pinia'
-//import { Event } from '@/types'
-
-type Event = any
+import { EventRecord } from 'types'
 
 export const useEventStore = defineStore('eventStore', {
     state: () => ({
         _pb: usePocketBase(),
-        _events: [] as Event[],
+        _events: [] as EventRecord[],
         lastUpdated: null as Date | null,
     }),
     getters: {
-        getList(limit: number = -1, team:any = null): Event[] {
+        getList(limit: number = -1, team:any = null): EventRecord[] {
             let events = this._events
             if (limit > -1) {
                 events = events.slice(0, limit)
@@ -19,19 +17,19 @@ export const useEventStore = defineStore('eventStore', {
             }
             return events
         },
-        getById(id: string = ''): Event | null {
+        getById(id: string = ''): EventRecord | null {
             if (!id) return null
             return this._events.find((event) => event.id === id) || null
         },
-        getUpcomingEvents(): Event[] {
+        getUpcomingEvents(): EventRecord[] {
             return this._events.filter((event) => new Date(event.start) > new Date())
         },
-        getByCategory(category: string = ''): Event[] {
+        getByCategory(category: string = ''): EventRecord[] {
             return this._events.filter((event) => event.category === category)
         },
-        getDayList(skipPast:boolean = false): Event[] {
+        getDayList(skipPast:boolean = false): EventRecord[] {
             const events = this._events
-            let days = [] as { day: string, events: Event[] }[]
+            let days = [] as { day: string, events: EventRecord[] }[]
             let currentDay = ''
             let currentDayEvents:Event[] = []
             for (const event of events) {
@@ -62,7 +60,7 @@ export const useEventStore = defineStore('eventStore', {
     },
     actions: {
         async update() {
-            const response = await this._pb.collection('events').getFullList<Event>({
+            const response = await pb.collection('events').getFullList<Event>({
                 expand: "location,category",
                 sort: "start"
             });
