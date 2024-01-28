@@ -1,6 +1,7 @@
 import { useLocalStorage } from "@vueuse/core"
+import { defineStore } from 'pinia'
 
-export const useEventManager = () => {
+export const useEventManager = defineStore('eventManager', () =>  {
     const pb = usePocketBase()
     const storage = useLocalStorage("eventStore", { updated: null, items: [] })
 
@@ -119,4 +120,4 @@ export const useEventManager = () => {
     }
 
     return EventManager
-}
+})
