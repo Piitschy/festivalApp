@@ -10,11 +10,10 @@ export const useEventStore = defineStore('eventStore', {
     getters: {
         getList: (state) => function(limit: number = -1, team:any = null): EventRecord[] {
             let events = state._events
-            if (limit > -1) {
-                events = events.slice(0, limit)
-            }if (team) {
-                events = events.filter((event) => event.team === team)
-            }
+
+            if (limit > -1) events = events.slice(0, limit)
+            if (team)       events = events.filter((event) => event.team === team)
+
             return events
         },
         getById: (state) => function(id: string = ''): EventRecord | null {
