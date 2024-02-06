@@ -22,9 +22,12 @@
 <script setup lang="ts">
 const loading = ref(true)
 const eventStore = useEventStore()
-eventStore.update()
-loading.value = false
 const skipPast = ref(true)
 
 const eventDays = computed(() => eventStore.getDayList(skipPast.value))
+
+onMounted(() => {
+    eventStore.update()
+    loading.value = false
+})
 </script>
