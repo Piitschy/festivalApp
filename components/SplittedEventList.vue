@@ -20,8 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import { EventDay } from 'types';
-
 const loading = ref(true)
 const eventStore = useEventStore()
 eventStore.update()
