@@ -8,7 +8,7 @@ export const useEventStore = defineStore('eventStore', {
         lastUpdated: null as Date | null,
     }),
     getters: {
-        getList: (state) => function(limit: number = -1, team:any = null): EventRecord[] {
+        getList: (state) => (limit: number = -1, team:any = null): EventRecord[] => {
             let events = state._events
 
             if (limit > -1) events = events.slice(0, limit)
@@ -16,13 +16,10 @@ export const useEventStore = defineStore('eventStore', {
 
             return events
         },
-        getById: (state) => function(id: string = ''): EventRecord | null {
-            if (!id) return null
-            return state._events.find((event) => event.id === id) || null
-        },
-        getUpcomingEvents(): EventRecord[] {
-            return this._events.filter((event) => new Date(event.start) > new Date())
-        },
+
+        getById: (state) => (id: string = '') => id ? state._events.find((event) => event.id === id) || null : null,
+        getUpcomingEvents: (state) => state._events.filter((event) => new Date(event.start) > new Date()),
+
         getByCategory: (state) => function(category: string = ''): EventRecord[]{
             return state._events.filter((event) => event.category === category)
         },
