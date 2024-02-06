@@ -19,10 +19,8 @@ export const useEventStore = defineStore('eventStore', {
 
         getById: (state) => (id: string = '') => id ? state._events.find((event) => event.id === id) || null : null,
         getUpcomingEvents: (state) => state._events.filter((event) => new Date(event.start) > new Date()),
-
-        getByCategory: (state) => function(category: string = ''): EventRecord[]{
-            return state._events.filter((event) => event.category === category)
-        },
+        getByCategory: (state) => (category: string = ''): EventRecord[] => state._events.filter((event) => event.category === category),
+        
         getDayList: (state) => {
             //takes the list of events and groups them by day
             const groupedEvents = state._events.reduce((acc, event) => {
