@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { EventDay, EventRecord } from 'types'
-import { usePocketBase } from "#imports"
 
 export const useEventStore = defineStore('eventStore', {
     state: () => ({
@@ -8,6 +7,7 @@ export const useEventStore = defineStore('eventStore', {
         lastUpdated: null as Date | null,
     }),
     getters: {
+        events: (state) => state._events,
         getList: (state) => (limit: number = -1, team:any = null): EventRecord[] => {
             let events = state._events
 
@@ -17,9 +17,9 @@ export const useEventStore = defineStore('eventStore', {
             return events
         },
 
-        getById: (state) => (id: string = '') => id ? state._events.find((event) => event.id === id) || null : null,
-        getUpcomingEvents: (state) => state._events.filter((event) => new Date(event.start) > new Date()),
-        getByCategory: (state) => (category: string = ''): EventRecord[] => state._events.filter((event) => event.category === category),
+        getById:            (state) => (id: string = '') => id ? state._events.find((event) => event.id === id) || null : null,
+        getUpcomingEvents:  (state) => state._events.filter((event) => new Date(event.start) > new Date()),
+        getByCategory:      (state) => (category: string = '') => state._events.filter((event) => event.category === category),
         
         getDayList: (state) => {
             //takes the list of events and groups them by day
